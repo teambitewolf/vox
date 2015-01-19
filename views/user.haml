@@ -1,0 +1,34 @@
+- if current_user.id == @user.id
+  %a{href: "/users/#{@user.id}/edit"} edit profile
+  = ' | '
+  %a{href: "/users/#{@user.id}/cards/edit"} edit cards
+  = ' | '
+  %a{href: "/users/#{@user.id}/cards/new"} add card
+%br
+%h3= @user.handle
+%h3= @user.email
+%h3 cards
+= 'no cards!' if @user.cards.empty?
+- @user.cards.each do |c|
+  %ul
+    %li= c.title
+    %li= c.comment
+    - if c.descriptor && c.descriptor.file_type == 'image'
+      %img{src: c.descriptor.file_path, alt: 'card img'}
+%h3 creations
+- if @user.creations.nil?
+  = 'no chains!'
+- else
+  - @user.creations.each do |v|
+    %ul
+      %li
+        %a{href: "/vox/#{v.id}"}= v.title
+%h3 collabs
+- if @user.collaborations.nil?
+  = 'no collabs!'
+- else
+  - @user.collaborations.each do |v|
+    %ul
+      %li
+        %a{href: "/vox/#{v.id}"}= v.title
+

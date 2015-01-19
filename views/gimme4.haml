@@ -1,0 +1,25 @@
+%form{action: "/vox/#{@vc.id}/move", method: 'post'}
+  %span move this:
+  - starts_at = @vc.breaks.select{|b| b[0].id == @vox.id}.first[1]
+  %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:0 10px 0 10px;height:100px;width:100px;'}
+    %span= @vox.comment
+    %br
+    %span= starts_at.to_s
+    %div{style: 'position:absolute;left:10px;bottom:10px'}= @vox.pre ? @vox.pre.comment : 'nil'
+    %div{style: 'position:absolute;right:10px;bottom:10px'}= @vox.nex ? @vox.nex.comment : 'nil'
+  %input{type: 'hidden', name: 'move_vox', value: @vox.id.to_s}
+  %br
+  %br
+  %select{name: 'pos'}
+    %option{value: 'before'} before
+    %option{value: 'after'} after
+  %br
+  %br
+  %span this:
+  %select{name: 'to_vox'}
+    - @vc.voxes.each do |v|
+      %option{value: v.id}= v.comment
+  %br
+  %br
+  %button{type: 'submit'} submit
+
