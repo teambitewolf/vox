@@ -1,0 +1,57 @@
+:javascript
+  $(document).ready(function() {
+    var audio = $('#player').get(0);
+    var bar   = $('.bar');
+
+    $(audio).bind('timeupdate', function() {
+      $('.pbar').width(((audio.currentTime * 100) / (audio.duration * 100)) * bar.width());
+    });
+
+    $("#ptog").click(function() {
+      if (audio.paused) {
+        $('#ptog').html('pause');
+        audio.play();
+      } else {
+        $('#ptog').html('play');
+        audio.pause();
+      }
+    });
+  });
+- if @vox.collaborators.include? current_user
+  %a{href: "/vox/#{@vox.id}/add"} append
+  = " | "
+  %a{href: "/vox/#{@vox.id}/layer"} layer
+%h1= @vox.title
+%h2= @vox.comment
+%h3= @vox.time / 1000.00
+%h3= @vox.creator.handle
+%h1#ptog play
+/.markers{style: 'height:20px;width:100%'}
+.bar{style: 'background-color:black;height:20px;width:100%;'}
+  %span#start_time_disp{style: 'color:white;margin-left:20px;'} 0:00
+  %span#end_time_disp{style: 'color:white;float:right;margin-right:20px;'} ?:??
+.pbar{style: 'background-color:red;height:20px;width:5px;'}
+%audio#player
+  %source{src: "/vox/#{@vox.id}/track"}
+%p
+  - @vox.voxes.each do |vox|
+    - starts_at = @vox.breaks.select{|b| b[0].id == vox.id}.first[1]
+    %div
+      %ul
+        %li
+          %a{href: "/vox/#{@vox.id}/add_before/#{vox.id}"} add here
+        %li
+          %a{href: "/vox/#{@vox.id}/move/#{vox.id}"} move
+        %li= "comment: #{vox.comment}"
+        %li= "created by: #{vox.user.handle}"
+        %li= "time: #{vox.time / 1000.00}"
+        %li= "starts at: #{starts_at}"
+        %li= "previous: #{vox.pre && vox.pre.comment}"
+        %li= "next: #{vox.nex && vox.nex.comment}"
+        %li
+          %form{action: "/vox/#{@vox.id}/delete", method: 'post'}
+            %input{type: 'hidden', name: 'vox_id', value: vox.id}
+            %button{type: 'submit'} delete
+-# :javascript
+-#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 320px;">');
+-#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 640px;">');
