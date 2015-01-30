@@ -6,14 +6,9 @@ class Vox
   include Mongoid::Timestamps
   include AudioProcessor
 
-  field :comment,      type: String
-  field :time,         type: Integer
-  field :accepted,     type: Boolean, default: true
-
-  #layering attrs
-  field :layered,      type: Boolean, default: false
-  field :layer_start,  type: Integer
-  field :layer_volume, type: Integer
+  field :comment,  type: String
+  field :time,     type: Integer
+  field :accepted, type: Boolean, default: true
 
   embeds_one :descriptor
   belongs_to :vox_chain
@@ -22,7 +17,11 @@ class Vox
   has_one    :nex, class_name: "Vox", inverse_of: :pre
   belongs_to :pre, class_name: "Vox", inverse_of: :nex
 
-  def initialize(attrs={}, upload=nil, root_path=nil)
+  belongs_to :layer, inverse_of: :layer
+  has_many :startls, class_name: 'Layer', inverse_of: :lstart, autosave: true
+  has_many :endls,   class_name: 'Layer', inverse_of: :lend,   autosave: true
+
+  def initialize(attrs={}, upload=nil, root_path=nil, options={})
     attrs['descriptor'] = persist(upload, root_path)
 
     super attrs

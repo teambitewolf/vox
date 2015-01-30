@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module AudioProcessor - RDoc Documentation</title>
+
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-check_wristwatch">#check_wristwatch</a>
+    
+    <li ><a href="#method-i-have_another_splice">#have_another_splice</a>
+    
+    <li ><a href="#method-i-layer-21">#layer!</a>
+    
+    <li ><a href="#method-i-layers-21">#layers!</a>
+    
+    <li ><a href="#method-i-merge_conflict">#merge_conflict</a>
+    
+    <li ><a href="#method-i-never_break_the_chain">#never_break_the_chain</a>
+    
+    <li ><a href="#method-i-put_on_your_sox">#put_on_your_sox</a>
+    
+    <li ><a href="#method-i-sox_process-21">#sox_process!</a>
+    
+    <li ><a href="#method-i-sox_time-21">#sox_time!</a>
+    
+    <li ><a href="#method-i-splice">#splice</a>
+    
+    <li ><a href="#method-i-splice-21">#splice!</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-AudioProcessor">
+  <h1 id="module-AudioProcessor" class="module">
+    module AudioProcessor
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-check_wristwatch" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_wristwatch</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_wristwatch-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_wristwatch</span>
+  <span class="ruby-identifier">cmd</span> = []
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;:in&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;-n stat&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;2&gt;&amp;1&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;|&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;grep&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&#39;Length (seconds)&#39;&quot;</span>
+  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-have_another_splice" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_another_splice</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="have_another_splice-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">have_another_splice</span>
+  <span class="ruby-identifier">cmd</span> = []
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;:out&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;splice&#39;</span>
+  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-layer-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">layer!</span><span
+            class="method-args">(start_vox, end_vox, layer_vox)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>To combine mix and effects (pad, trim etc) use the following:</p>
+
+<p>sox -m “|sox end.mp3 -p pad 6 0” start.mp3 output.mp3 The general pattern
+is:</p>
+
+<p>sox -m input1 input2 … inputN output where inputX can be either a filename
+or a pipe in quotes</p>
+
+<p>“|sox end.mp3 -p pad 6”</p>
+          
+          
+
+          
+          <div class="method-source-code" id="layer-21-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">layer!</span>(<span class="ruby-identifier">start_vox</span>, <span class="ruby-identifier">end_vox</span>, <span class="ruby-identifier">layer_vox</span>)
+  <span class="ruby-identifier">start_time</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">id</span> }.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>]
+  <span class="ruby-identifier">end_time</span>   = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">o</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">time</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-layers-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">layers!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="layers-21-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">layers!</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">layered</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-merge_conflict" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">merge_conflict</span><span
+            class="method-args">(start_time, end_time)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>start_time is the overall beginning time of the vox that starts the layer.
+end_time is either the overall end time of the vox that the layer runs
+through, or the end of the chain</p>
+          
+          
+
+          
+          <div class="method-source-code" id="merge_conflict-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">merge_conflict</span>(<span class="ruby-identifier">start_time</span>, <span class="ruby-identifier">end_time</span>)
+  <span class="ruby-identifier">cmd</span> = []
+  <span class="ruby-identifier">cmd</span> = <span class="ruby-string">&#39;-m&#39;</span>
+  <span class="ruby-identifier">cmd</span> = <span class="ruby-node">&quot;\&quot;|sox :layer -p pad #{start_time} 0 trim 0 #{end_time}\&quot;&quot;</span>
+  <span class="ruby-identifier">cmd</span> = <span class="ruby-string">&#39;:main&#39;</span> <span class="ruby-comment"># main</span>
+  <span class="ruby-identifier">cmd</span> = <span class="ruby-string">&#39;:out&#39;</span>
+  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-never_break_the_chain" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">never_break_the_chain</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="never_break_the_chain-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">never_break_the_chain</span>
+  <span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-put_on_your_sox" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">put_on_your_sox</span><span
+            class="method-args">(nm=true, eq=true, cm=true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="put_on_your_sox-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">put_on_your_sox</span>(<span class="ruby-identifier">nm</span>=<span class="ruby-keyword">true</span>, <span class="ruby-identifier">eq</span>=<span class="ruby-keyword">true</span>, <span class="ruby-identifier">cm</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">cmd</span> = []
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;:in&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;-c 1&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;-C 128&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;:out&#39;</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;riaa&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eq</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;compand 0.3,1 6:-70,-60,-20 -10 -90 0.2&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cm</span>
+  <span class="ruby-identifier">cmd</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;norm&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nm</span>
+  <span class="ruby-comment"># cmd &lt;&lt; &#39;vad reverse vad reverse&#39;</span>
+  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sox_process-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sox_process!</span><span
+            class="method-args">(options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>options: Hash :norm, :eq, :compress</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sox_process-21-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sox_process!</span>(<span class="ruby-identifier">options</span>={})
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">processed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">cmd</span>    = <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;sox&#39;</span>, <span class="ruby-identifier">put_on_your_sox</span>)
+  <span class="ruby-identifier">input</span>  = <span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path_orig</span>
+  <span class="ruby-identifier">output</span> = <span class="ruby-identifier">file_path_p</span> <span class="ruby-identifier">input</span>
+
+  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">run</span>(<span class="ruby-keyword">in</span><span class="ruby-operator">:</span> <span class="ruby-identifier">input</span>, <span class="ruby-identifier">out</span><span class="ruby-operator">:</span> <span class="ruby-identifier">output</span>)
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path_proc</span> = <span class="ruby-identifier">output</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path</span> = <span class="ruby-identifier">output</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sox_time-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sox_time!</span><span
+            class="method-args">(rerun=false)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sox_time-21-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sox_time!</span>(<span class="ruby-identifier">rerun</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">time</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">rerun</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span>
+    <span class="ruby-identifier">cmd</span>   = <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;sox&#39;</span>, <span class="ruby-identifier">check_wristwatch</span>)
+    <span class="ruby-identifier">path</span>  = <span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path</span>
+    <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/(\d+\.\d+)/</span>.<span class="ruby-identifier">match</span> <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">run</span>(<span class="ruby-keyword">in</span><span class="ruby-operator">:</span> <span class="ruby-identifier">path</span>)
+
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">time</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">captures</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">*</span><span class="ruby-value">1000</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-splice" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">splice</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="splice-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">splice</span>
+  <span class="ruby-identifier">new_filename</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39; &#39;</span>, <span class="ruby-string">&#39;_&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">joined</span>
+  <span class="ruby-identifier">dst</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">new_filename</span>, <span class="ruby-string">&#39;.mp3&#39;</span>])
+  <span class="ruby-identifier">dst</span>.<span class="ruby-identifier">binmode</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">segments</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">accepted</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">file_cmd</span> = <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;sox&#39;</span>, <span class="ruby-identifier">have_another_splice</span>)
+      <span class="ruby-identifier">file_cmd</span>.<span class="ruby-identifier">run</span>(<span class="ruby-identifier">out</span><span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dst</span>.<span class="ruby-identifier">path</span>))
+
+      <span class="ruby-identifier">time_cmd</span> = <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;sox&#39;</span>, <span class="ruby-identifier">check_wristwatch</span>)
+      <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/(\d+\.\d+)/</span>.<span class="ruby-identifier">match</span> <span class="ruby-identifier">time_cmd</span>.<span class="ruby-identifier">run</span>(<span class="ruby-keyword">in</span><span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dst</span>.<span class="ruby-identifier">path</span>))
+
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">audio</span> = <span class="ruby-identifier">dst</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">time</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-comment"># self.time = Time.at(match[0].to_f).utc.strftime(&quot;%M:%S&quot;)</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-identifier">dst</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-identifier">dst</span>.<span class="ruby-identifier">unlink</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">dst</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-splice-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">splice!</span><span
+            class="method-args">(root_path=nil, options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="splice-21-source">
+            <pre><span class="ruby-comment"># File vox/audio_processor.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">splice!</span>(<span class="ruby-identifier">root_path</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">count</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">count</span>
+      <span class="ruby-identifier">cmd</span>    = <span class="ruby-constant">Cocaine</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandLine</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;sox&#39;</span>, <span class="ruby-identifier">have_another_splice</span>)
+      <span class="ruby-identifier">output</span> = <span class="ruby-identifier">splice_path</span>(<span class="ruby-identifier">root_path</span>)
+      <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">run</span>(<span class="ruby-identifier">out</span><span class="ruby-operator">:</span> <span class="ruby-identifier">output</span>)
+
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">count</span> = <span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">count</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span>.<span class="ruby-identifier">file_path</span> = <span class="ruby-identifier">output</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">descriptor</span> = <span class="ruby-constant">Descriptor</span>.<span class="ruby-identifier">new</span>({
+          <span class="ruby-identifier">file_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">last</span>,
+          <span class="ruby-identifier">file_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;audio/mp3&#39;</span>,
+          <span class="ruby-identifier">file_cat</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;audio&#39;</span>,
+          <span class="ruby-identifier">file_ext</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;mp3&#39;</span>,
+          <span class="ruby-identifier">file_path</span><span class="ruby-operator">:</span> <span class="ruby-identifier">output</span>,
+        })
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">sox_time!</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># ???</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">time</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">time</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

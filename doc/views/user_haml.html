@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>user.haml - RDoc Documentation</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-%27+%7C+%27">&#39; | &#39;</a>
+    <li><a href="#label-%27+%7C+%27">&#39; | &#39;</a>
+    <li><a href="#label-%27no+cards%21%27+if+%40user.cards.empty%3F">&#39;no cards!&#39; if @user.cards.empty?</a>
+    <li><a href="#label-%27no+chains%21%27">&#39;no chains!&#39;</a>
+    <li><a href="#label-%27no+collabs%21%27">&#39;no collabs!&#39;</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Gemfile.html">Gemfile</a>
+  
+    <li><a href="../Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../README_md.html">README</a>
+  
+    <li><a href="../config_ru.html">config.ru</a>
+  
+    <li><a href="../views/add_haml.html">add.haml</a>
+  
+    <li><a href="../views/add_before_haml.html">add_before.haml</a>
+  
+    <li><a href="../views/add_under_haml.html">add_under.haml</a>
+  
+    <li><a href="../views/error_haml.html">error.haml</a>
+  
+    <li><a href="../views/half_under_haml.html">half_under.haml</a>
+  
+    <li><a href="../views/layout_haml.html">layout.haml</a>
+  
+    <li><a href="../views/login_haml.html">login.haml</a>
+  
+    <li><a href="../views/move_haml.html">move.haml</a>
+  
+    <li><a href="../views/new_haml.html">new.haml</a>
+  
+    <li><a href="../views/ordered_haml.html">ordered.haml</a>
+  
+    <li><a href="../views/user_haml.html">user.haml</a>
+  
+    <li><a href="../views/vox_haml.html">vox.haml</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page views/user.haml">
+<ul><li>
+<p>if current_user.id == @user.id %a{href: “/users/#{@user.id}/edit”} edit
+profile</p>
+
+<h1 id="label-%27+%7C+%27">&#39; | &#39;<span><a href="#label-%27+%7C+%27">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>%a{href: “/users/#{@user.id}/cards/edit”} edit cards</p>
+
+<h1 id="label-%27+%7C+%27">&#39; | &#39;<span><a href="#label-%27+%7C+%27">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>%a{href: “/users/#{@user.id}/cards/new”} add card</p>
+</li></ul>
+
+<p>%br %h3= @user.handle %h3= @user.email %h3 cards</p>
+
+<h1 id="label-%27no+cards%21%27+if+%40user.cards.empty%3F">&#39;no cards!&#39; if @user.cards.empty?<span><a href="#label-%27no+cards%21%27+if+%40user.cards.empty%3F">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<ul><li>
+<p>@user.cards.each do |c| %ul</p>
+
+<pre>%li= c.title
+%li= c.comment
+- if c.descriptor &amp;&amp; c.descriptor.file_type == &#39;image&#39;
+  %img{src: c.descriptor.file_path, alt: &#39;card img&#39;}</pre>
+</li></ul>
+
+<p>%h3 creations</p>
+<ul><li>
+<p>if @user.creations.nil?</p>
+
+<h1 id="label-%27no+chains%21%27">&#39;no chains!&#39;<span><a href="#label-%27no+chains%21%27">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+</li><li>
+<p>else</p>
+<ul><li>
+<p>@user.creations.each do |v| %ul</p>
+
+<pre>%li
+  %a{href: &quot;/vox/#{v.id}&quot;}= v.title</pre>
+</li></ul>
+</li></ul>
+
+<p>%h3 collabs</p>
+<ul><li>
+<p>if @user.collaborations.nil?</p>
+
+<h1 id="label-%27no+collabs%21%27">&#39;no collabs!&#39;<span><a href="#label-%27no+collabs%21%27">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+</li><li>
+<p>else</p>
+<ul><li>
+<p>@user.collaborations.each do |v| %ul</p>
+
+<pre>%li
+  %a{href: &quot;/vox/#{v.id}&quot;}= v.title</pre>
+</li></ul>
+</li></ul>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

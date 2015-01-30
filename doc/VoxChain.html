@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class VoxChain - RDoc Documentation</title>
+
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Mongoid::Document</span>
+  
+  
+  
+    <li><span class="include">Mongoid::Timestamps</span>
+  
+  
+  
+    <li><a class="include" href="AudioProcessor.html">AudioProcessor</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add">#add</a>
+    
+    <li ><a href="#method-i-add_before">#add_before</a>
+    
+    <li ><a href="#method-i-add_under">#add_under</a>
+    
+    <li ><a href="#method-i-breaks">#breaks</a>
+    
+    <li ><a href="#method-i-comes_before-3F">#comes_before?</a>
+    
+    <li ><a href="#method-i-in_order-3F">#in_order?</a>
+    
+    <li ><a href="#method-i-layer_dir">#layer_dir</a>
+    
+    <li ><a href="#method-i-layer_path">#layer_path</a>
+    
+    <li ><a href="#method-i-move">#move</a>
+    
+    <li ><a href="#method-i-ordered_voxes">#ordered_voxes</a>
+    
+    <li ><a href="#method-i-remove">#remove</a>
+    
+    <li ><a href="#method-i-splice_dir">#splice_dir</a>
+    
+    <li ><a href="#method-i-splice_path">#splice_path</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-VoxChain">
+  <h1 id="class-VoxChain" class="class">
+    class VoxChain
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add</span><span
+            class="method-args">(new_vox)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">new_vox</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_vox</span>
+  <span class="ruby-identifier">v</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>}.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">new_vox</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">new_vox</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_before" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_before</span><span
+            class="method-args">(the_vox, new_vox)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_before-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_before</span>(<span class="ruby-identifier">the_vox</span>, <span class="ruby-identifier">new_vox</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_vox</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">the_vox</span>.<span class="ruby-identifier">pre</span>
+    <span class="ruby-identifier">p</span> = <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">the_vox</span>.<span class="ruby-identifier">pre</span>)
+    <span class="ruby-identifier">p</span>.<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">new_vox</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">new_vox</span>.<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">the_vox</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_under" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_under</span><span
+            class="method-args">(vox, start_vox, end_vox)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_under-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_under</span>(<span class="ruby-identifier">vox</span>, <span class="ruby-identifier">start_vox</span>, <span class="ruby-identifier">end_vox</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">start_vox</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">end_vox</span>)
+    <span class="ruby-identifier">layer</span>       = <span class="ruby-constant">Layer</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">layer</span>.<span class="ruby-identifier">vox</span>   = <span class="ruby-identifier">vox</span>
+    <span class="ruby-identifier">layer</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">start_vox</span>
+    <span class="ruby-identifier">layer</span>.<span class="ruby-identifier">end</span>   = <span class="ruby-identifier">end_vox</span>
+    <span class="ruby-identifier">layer</span>.<span class="ruby-identifier">vol</span>   = <span class="ruby-value">50</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">layers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">layer</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-breaks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">breaks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="breaks-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">breaks</span>
+  <span class="ruby-ivar">@breaks</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">time</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">reduce</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">time</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">time</span>
+      <span class="ruby-comment"># let&#39;s create some fucking [[],[],[]] action</span>
+      <span class="ruby-identifier">m</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">v</span>, <span class="ruby-identifier">time</span> <span class="ruby-operator">/</span> <span class="ruby-value">1000.00</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-comes_before-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">comes_before?</span><span
+            class="method-args">(the_vox, maybe_before)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="comes_before-3F-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">comes_before?</span>(<span class="ruby-identifier">the_vox</span>, <span class="ruby-identifier">maybe_before</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">the_vox</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">maybe_before</span>)
+    <span class="ruby-identifier">binding</span>.<span class="ruby-identifier">pry</span>
+    <span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">id</span>} <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">index</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">o</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">id</span>}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-in_order-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">in_order?</span><span
+            class="method-args">(*voxes)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="in_order-3F-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">in_order?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">voxes</span>)
+  <span class="ruby-identifier">voxes_ordered</span> = <span class="ruby-identifier">ordered_voxes</span>.<span class="ruby-identifier">reduce</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arr</span>, <span class="ruby-identifier">vox</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">vox</span>
+      <span class="ruby-identifier">arr</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">vox</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">arr</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">voxes</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">voxes_ordered</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-layer_dir" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">layer_dir</span><span
+            class="method-args">(root_path=nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="layer_dir-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">layer_dir</span>(<span class="ruby-identifier">root_path</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@file_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">root_dir</span> = <span class="ruby-identifier">root_path</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&#39;..&#39;</span>) { <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> }
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">root_dir</span>, <span class="ruby-string">&#39;public&#39;</span>, <span class="ruby-string">&#39;uploads&#39;</span>, <span class="ruby-string">&#39;chains&#39;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y%m%d&#39;</span>), <span class="ruby-string">&#39;layered&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-layer_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">layer_path</span><span
+            class="method-args">(root_path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="layer_path-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">layer_path</span>(<span class="ruby-identifier">root_path</span>)
+  <span class="ruby-ivar">@file_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">layer_dir</span>(<span class="ruby-identifier">root_path</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span> <span class="ruby-identifier">dir</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">dir</span>, <span class="ruby-node">&quot;#{title}.mp3&quot;</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">touch</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">path</span>
+    <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-move" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">move</span><span
+            class="method-args">(pos, move_vox, to_vox)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="move-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">move</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-identifier">move_vox</span>, <span class="ruby-identifier">to_vox</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">move_vox</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">to_vox</span>) <span class="ruby-operator">&amp;&amp;</span> [<span class="ruby-value">:before</span>, <span class="ruby-value">:after</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">pos</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">pre</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">nex</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">pre</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">nex</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">pre</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">nex</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>.<span class="ruby-identifier">nex</span>).<span class="ruby-identifier">pre</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">==</span> <span class="ruby-value">:before</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">to_vox</span>.<span class="ruby-identifier">pre</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">to_vox</span>.<span class="ruby-identifier">pre</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">move_vox</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>).<span class="ruby-identifier">pre</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">to_vox</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">==</span> <span class="ruby-value">:after</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">to_vox</span>.<span class="ruby-identifier">nex</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">to_vox</span>.<span class="ruby-identifier">nex</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">move_vox</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">to_vox</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-identifier">move_vox</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ordered_voxes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ordered_voxes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ordered_voxes-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ordered_voxes</span>
+  <span class="ruby-ivar">@ordered_voxes</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+     <span class="ruby-identifier">elem</span>    = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">pre</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> }.<span class="ruby-identifier">first</span>
+     <span class="ruby-identifier">ordered</span> = [<span class="ruby-identifier">elem</span>]
+
+     <span class="ruby-keyword">while</span> <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">nex</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">do</span>
+       <span class="ruby-identifier">ordered</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">nex</span>
+       <span class="ruby-identifier">elem</span> = <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">nex</span>
+     <span class="ruby-keyword">end</span>
+
+     <span class="ruby-identifier">ordered</span>
+   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-remove" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove</span><span
+            class="method-args">(vox_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="remove-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">vox_id</span>)
+  <span class="ruby-identifier">v</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">vox_id</span>).<span class="ruby-identifier">first</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">pre</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">pre</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span>)
+        <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">pre</span>).<span class="ruby-identifier">nex</span> = <span class="ruby-constant">Vox</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">pre</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span>)
+        <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nex</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">voxes</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">v</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-splice_dir" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">splice_dir</span><span
+            class="method-args">(root_path=nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="splice_dir-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">splice_dir</span>(<span class="ruby-identifier">root_path</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@file_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">root_dir</span> = <span class="ruby-identifier">root_path</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-string">&#39;..&#39;</span>) { <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> }
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">root_dir</span>, <span class="ruby-string">&#39;public&#39;</span>, <span class="ruby-string">&#39;uploads&#39;</span>, <span class="ruby-string">&#39;chains&#39;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y%m%d&#39;</span>), <span class="ruby-string">&#39;original&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-splice_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">splice_path</span><span
+            class="method-args">(root_path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="splice_path-source">
+            <pre><span class="ruby-comment"># File vox/vox_chain.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">splice_path</span>(<span class="ruby-identifier">root_path</span>)
+  <span class="ruby-ivar">@file_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">splice_dir</span>(<span class="ruby-identifier">root_path</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span> <span class="ruby-identifier">dir</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">dir</span>, <span class="ruby-node">&quot;#{title}.mp3&quot;</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">touch</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">path</span>
+    <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

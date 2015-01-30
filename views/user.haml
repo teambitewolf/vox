@@ -16,19 +16,14 @@
     - if c.descriptor && c.descriptor.file_type == 'image'
       %img{src: c.descriptor.file_path, alt: 'card img'}
 %h3 creations
-- if @user.creations.nil?
-  = 'no chains!'
-- else
-  - @user.creations.each do |v|
-    %ul
-      %li
-        %a{href: "/vox/#{v.id}"}= v.title
+%a{href: '/vox/new'} new
+- @user.creations.each do |v|
+  %ul
+    %li
+      %a{href: "/vox/#{v.id}"}= v.title
 %h3 collabs
-- if @user.collaborations.nil?
-  = 'no collabs!'
-- else
-  - @user.collaborations.each do |v|
-    %ul
-      %li
-        %a{href: "/vox/#{v.id}"}= v.title
+- @user.collaborations.each do |v|
+  %ul
+    %li
+      %a{href: "/vox/#{v.id}"}= v.title
 

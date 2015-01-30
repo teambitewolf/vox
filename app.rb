@@ -10,6 +10,8 @@ require './vox/user'
 require './vox/descriptor'
 require './vox/card'
 require './vox/session'
+require './vox/layer'
+require './vox/invitation'
 
 configure do
   Mongoid.load! 'mongoid.yml'
@@ -30,7 +32,7 @@ set :request_method do |rm|
 end
 
 def current_user
-  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  @current_user ||= User.where(id: session[:user_id]).first
 end
 
 def flash
@@ -59,7 +61,7 @@ before request_method: :post do
 end
 
 get '/login' do
-  redirect to '/vox/54ab635d6272615463000000' if current_user
+  redirect to "/user_by_name/#{current_user.name}" if current_user
   haml :login
 end
 
@@ -85,7 +87,7 @@ post '/auth/developer/callback' do
     end
   end
 
-  redirect to '/vox/54ab635d6272615463000000'
+  redirect to "/user_by_name/#{user.handle}"
 end
 
 get '/logout' do
@@ -103,7 +105,7 @@ get '/users/:user_id' do
   end
 end
 
-get '/users/:handle' do
+get '/user_by_name/:handle' do
   @user = User.where(handle: params['handle']).first
 
   if @user
@@ -113,18 +115,25 @@ get '/users/:handle' do
   end
 end
 
-get '/vox/new' do
-  haml :gimme
+get '/voxes' do
+  @voxes = VoxChain.all
+  @voxes.to_json
 end
 
-get '/vox/:vox_id/add' do
-  @vox = VoxChain.find params['vox_id']
-  haml :gimme2
+get '/vox/new' do
+  haml :new
 end
 
 get '/vox/:vox_id' do
-  @vox = VoxChain.find params['vox_id']
+  @vc = VoxChain.find params['vox_id']
+  @vc.splice!
+  @vc.mix!
   haml :vox
+end
+
+get '/vox/:chain_id/add' do
+  @vc = VoxChain.find params['chain_id']
+  haml :add
 end
 
 get '/vox/:vox_id/track' do
@@ -137,11 +146,6 @@ get '/vox/:vox_id/track' do
   end
 end
 
-get '/vox/file/:chain_id' do
-  vc = VoxChain.find params['chain_id']
-  send_file vc.descriptor.file_path_proc, type: :mp3
-end
-
 get '/vox/:chain_id/add_before/:vox_id' do
   @vc = VoxChain.find params['chain_id']
 
@@ -149,7 +153,36 @@ get '/vox/:chain_id/add_before/:vox_id' do
     @vox = @vc.voxes.find params['vox_id']
 
     if @vox
-      haml :gimme3
+      haml :add_before
+    end
+  else
+    redirect to '/error/something_happened'
+  end
+end
+
+get '/vox/:chain_id/add_under/:start_vox/:end_vox' do
+  @vc = VoxChain.find params['chain_id']
+
+  if @vc
+    @start = @vc.voxes.find params['start_vox']
+    @end   = @vc.voxes.find params['end_vox']
+
+    if @start && @end
+      haml :add_under
+    end
+  else
+    redirect to '/error/something_happened'
+  end
+end
+
+get '/vox/:chain_id/add_under/:start_vox' do
+  @vc = VoxChain.find params['chain_id']
+
+  if @vc
+    @start = @vc.voxes.find params['start_vox']
+
+    if @start
+      haml :half_under
     end
   else
     redirect to '/error/something_happened'
@@ -163,7 +196,7 @@ get '/vox/:chain_id/move/:vox_id' do
     @vox = @vc.voxes.find params['vox_id']
 
     if @vox
-      haml :gimme4
+      haml :move
     end
   else
     redirect to '/error/something_happened'
@@ -180,6 +213,54 @@ get '/vox/:chain_id/ordered' do
   end
 end
 
+get '/invitations/new' do
+  haml :invitation
+end
+
+get '/error/something_happened' do
+  haml :error
+end
+
+post '/vox/invitations' do
+  invitee = User.find params['invitee_id']
+  invitor = User.find params['invitor_id']
+  chain   = VoxChain.find params['chain_id']
+
+  if !chain.collaborators.include?(invitee) && chain.collaborators.include?(invitor)
+    invitation = Invitation.new({
+      vox_chain: chain,
+      invitor: invitor,
+      invitee: invitee
+    })
+  end
+end
+
+post '/invitations/:invitation_id/accept' do
+  invitation = Invitation.find params['invitation_id']
+end
+
+post '/invitations/:invitation/decline' do
+  invitation = Invitation.find params['invitation_id']
+end
+
+post '/vox/:chain_id/add_under' do
+  vc = VoxChain.find params['chain_id']
+
+  if vc
+    s = vc.voxes.find params['start_vox']
+    e = vc.voxes.find params['end_vox']
+
+    if s && e && params['vox']
+      params['vox']['user'] = current_user
+      vc.add_under Vox.new(params['vox'], @upload, settings.root), s, e
+      vc.splice! settings.root
+      redirect to "/vox/#{vc.id}" and return
+    end
+  end
+
+  redirect to '/error/something_happened'
+end
+
 post '/vox/:chain_id/move' do
   vc = VoxChain.find params['chain_id']
 
@@ -191,10 +272,7 @@ post '/vox/:chain_id/move' do
     if move && to && pos
       vc.move pos, move, to
       vc.splice! settings.root
-
-      if vc.save
-        redirect to "/vox/#{vc.id}" and return
-      end
+      redirect to "/vox/#{vc.id}" and return
     end
   end
 
@@ -211,10 +289,7 @@ post '/vox/:chain_id/add_before' do
       params['vox']['user'] = current_user
       vc.add_before v, Vox.new(params['vox'], @upload, settings.root)
       vc.splice! settings.root
-
-      if vc.save
-        redirect to "/vox/#{vc.id}" and return
-      end
+      redirect to "/vox/#{vc.id}" and return
     end
   end
 
@@ -225,17 +300,15 @@ post '/vox' do
   vc = VoxChain.new({
     title: (params['title'] || 'new'),
     comment: params['vox']['comment'],
-    creator: current_user
+    creator: current_user,
+    collaborators: [current_user]
   })
 
   if vc.save
     params['vox']['user'] = current_user
     vc.add Vox.new params['vox'], @upload, settings.root
     vc.splice! settings.root
-
-    if vc.save
-      redirect to "/vox/#{vc.id}" and return
-    end
+    redirect to "/vox/#{vc.id}" and return
   end
 
   redirect to '/error/something_happened'
@@ -244,14 +317,11 @@ end
 post '/vox/:vox_id/add' do
   vc = VoxChain.find params['vox_id']
 
-  if !vc.nil?
+  if vc
     params['vox']['user'] = current_user
     vc.add Vox.new params['vox'], @upload, settings.root
     vc.splice! settings.root
-
-    if vc.save
-      redirect to("/vox/#{vc.id}") and return
-    end
+    redirect to("/vox/#{vc.id}") and return
   end
 
   redirect to '/error/something_happened'
@@ -260,18 +330,11 @@ end
 post '/vox/:chain_id/delete' do
   vc = VoxChain.find params['chain_id']
 
-  if !vc.nil?
+  if vc
     vc.remove params['vox_id']
     vc.splice! settings.root
-
-    if vc.save
-      redirect to("/vox/#{vc.id}") and return
-    end
+    redirect to("/vox/#{vc.id}") and return
   end
 
   redirect to '/error/something_happened'
-end
-
-get '/error/something_happened' do
-  haml :error
 end

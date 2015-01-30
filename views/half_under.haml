@@ -35,7 +35,7 @@
   %source{src: "/vox/#{@vc.id}/track"}
 %h4 layers
 %p
-  - @vc.layers.each do |layer|
+  -@vc.layers.each do |layer|
     %div
       %ul
         %li= "comment: #{layer.vox.comment}"
@@ -44,7 +44,7 @@
         %li= "start: #{layer.lstart && layer.lstart.comment}"
         %li= "end: #{layer.lend && layer.lend.comment}"
         %li
-          %form{action: "/vox/#{@vc.id}/layers/delete", method: 'post'}
+          %form{action: "/vox/#{@vc.id}/layer/delete", method: 'post'}
             %input{type: 'hidden', name: 'vox_id', value: layer.vox.id}
             %button{type: 'submit'} delete
 %h4 voxes
@@ -57,8 +57,9 @@
           %a{href: "/vox/#{@vc.id}/add_before/#{vox.id}"} add here
         %li
           %a{href: "/vox/#{@vc.id}/move/#{vox.id}"} move
-        %li
-          %a{href: "/vox/#{@vc.id}/add_under/#{vox.id}"} start layer here
+        - if @vc.comes_before?(@start, vox)
+          %li
+            %a{href: "/vox/#{@vc.id}/add_under/#{@start.id}/#{vox.id}"} end layer here
         %li= "comment: #{vox.comment}"
         %li= "created by: #{vox.user.handle}"
         %li= "time: #{vox.time / 1000.00}"
@@ -71,4 +72,3 @@
             %button{type: 'submit'} delete
 -# :javascript
 -#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 320px;">');
--#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 640px;">');
