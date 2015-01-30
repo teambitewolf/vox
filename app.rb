@@ -126,8 +126,6 @@ end
 
 get '/vox/:vox_id' do
   @vc = VoxChain.find params['vox_id']
-  @vc.splice!
-  @vc.mix!
   haml :vox
 end
 
@@ -254,6 +252,7 @@ post '/vox/:chain_id/add_under' do
       params['vox']['user'] = current_user
       vc.add_under Vox.new(params['vox'], @upload, settings.root), s, e
       vc.splice! settings.root
+      vc.mix!
       redirect to "/vox/#{vc.id}" and return
     end
   end
