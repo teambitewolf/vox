@@ -1,4 +1,4 @@
-%form{action: "/vox/#{@vc.id}/add_under", method: 'post', enctype: 'multipart/form-data'}
+%form{action: "/chains/#{@vc.id}/add_under", method: 'post', enctype: 'multipart/form-data'}
   %span start layer at:
   - starts_at = @vc.breaks.select{|b| b[0].id == @start.id}.first[1]
   %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:0 10px 0 10px;height:100px;width:100px;'}

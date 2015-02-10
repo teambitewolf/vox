@@ -1,0 +1,6 @@
+%form{action: polymorphic_url([@owner, 'cards']), method: 'post', enctype: 'multipart/form-data'}
+  %input{type: 'text', name: 'card[text]'}
+  %br
+  %input{type: 'file', name: 'card[upload]'}
+  %br
+  %button{type: 'submit'} submit

@@ -18,9 +18,9 @@
     });
   });
 - if @vc.collaborators.include? current_user
-  %a{href: "/vox/#{@vc.id}/add"} append
+  %a{href: "/chains/#{@vc.id}/add"} append
   = " | "
-  %a{href: "/vox/#{@vc.id}/layer"} layer
+  %a{href: "/chains/#{@vc.id}/layer"} layer
 %h1= @vc.title
 %h2= @vc.comment
 %h3= @vc.time / 1000.00
@@ -32,19 +32,19 @@
   %span#end_time_disp{style: 'color:white;float:right;margin-right:20px;'} ?:??
 .pbar{style: 'background-color:red;height:20px;width:5px;'}
 %audio#player
-  %source{src: "/vox/#{@vc.id}/track"}
+  %source{src: "/chains/#{@vc.id}/track"}
 %h4 layers
 %p
   -@vc.layers.each do |layer|
     %div
       %ul
         %li= "comment: #{layer.vox.comment}"
-        %li= "created by: #{layer.vox.user.handle}"
+        %li= "created by: #{layer.vox.creator.handle}"
         %li= "volume: #{layer.vol}"
         %li= "start: #{layer.lstart && layer.lstart.comment}"
         %li= "end: #{layer.lend && layer.lend.comment}"
         %li
-          %form{action: "/vox/#{@vc.id}/layer/delete", method: 'post'}
+          %form{action: "/chains/#{@vc.id}/layer/delete", method: 'post'}
             %input{type: 'hidden', name: 'vox_id', value: layer.vox.id}
             %button{type: 'submit'} delete
 %h4 voxes
@@ -54,20 +54,20 @@
     %div
       %ul
         %li
-          %a{href: "/vox/#{@vc.id}/add_before/#{vox.id}"} add here
+          %a{href: "/chains/#{@vc.id}/add_before/#{vox.id}"} add here
         %li
-          %a{href: "/vox/#{@vc.id}/move/#{vox.id}"} move
+          %a{href: "/chains/#{@vc.id}/move/#{vox.id}"} move
         - if @vc.comes_before?(@start, vox)
           %li
-            %a{href: "/vox/#{@vc.id}/add_under/#{@start.id}/#{vox.id}"} end layer here
+            %a{href: "/chains/#{@vc.id}/add_under/#{@start.id}/#{vox.id}"} end layer here
         %li= "comment: #{vox.comment}"
-        %li= "created by: #{vox.user.handle}"
+        %li= "created by: #{vox.creator.handle}"
         %li= "time: #{vox.time / 1000.00}"
         %li= "starts at: #{starts_at}"
         %li= "previous: #{vox.pre && vox.pre.comment}"
         %li= "next: #{vox.nex && vox.nex.comment}"
         %li
-          %form{action: "/vox/#{@vc.id}/delete", method: 'post'}
+          %form{action: "/chains/#{@vc.id}/delete", method: 'post'}
             %input{type: 'hidden', name: 'vox_id', value: vox.id}
             %button{type: 'submit'} delete
 -# :javascript

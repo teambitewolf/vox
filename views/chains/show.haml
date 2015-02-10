@@ -18,57 +18,69 @@
     });
   });
 - if @vc.collaborators.include? current_user
-  %a{href: "/vox/#{@vc.id}/add"} append
-  = " | "
-  %a{href: "/vox/#{@vc.id}/layer"} layer
+  %a{href: "/chains/#{@vc.id}/voxes/new"} append
 %h1= @vc.title
-%h2= @vc.comment
-%h3= @vc.time / 1000.00
-%h3= @vc.creator.handle
+%h3= @vc.display_time
+%h3
+  = "created by"
+  %a{href: "/users/#{@vc.creator.id}"}= @vc.creator.handle
+%h3
+  %a{href: "/chains/#{@vc.id}/invitations/new"} invite
+%h3
+  = "cards"
+  %a{href: "/chains/#{@vc.id}/cards/new"} new
+= 'no cards!' if @vc.cards.empty?
+- @vc.cards.each do |card|
+  %div{style: 'width:300px;border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block;'}
+    %img{src: polymorphic_url([@vc, card, 'image/small']), style: 'float:right;'}
+    .title{style: 'margin-top:10px;font-size:0.75em;'}= card.text
 %h1#ptog play
 /.markers{style: 'height:20px;width:100%'}
 .bar{style: 'background-color:black;height:20px;width:100%;'}
-  %span#start_time_disp{style: 'color:white;margin-left:20px;'} 0:00
-  %span#end_time_disp{style: 'color:white;float:right;margin-right:20px;'} ?:??
+  /%span#start_time_disp{style: 'color:white;margin-left:20px;'} 0:00
+  /%span#end_time_disp{style: 'color:white;float:right;margin-right:20px;'} ?:??
 .pbar{style: 'background-color:red;height:20px;width:5px;'}
 %audio#player
-  %source{src: "/vox/#{@vc.id}/track"}
-%h4 layers
+  %source{src: "/chains/#{@vc.id}/track"}
+%h3 layers
 %p
   - @vc.layers.each do |layer|
     %div
       %ul
+        %li
+          %a{href: "/chains/#{@vc.id}/layers/#{layer.id}/edit"} edit
         %li= "comment: #{layer.vox.comment}"
-        %li= "created by: #{layer.vox.user.handle}"
+        %li= "created by: #{layer.vox.creator.handle}"
         %li= "volume: #{layer.vol}"
         %li= "start: #{layer.lstart && layer.lstart.comment}"
         %li= "end: #{layer.lend && layer.lend.comment}"
         %li
-          %form{action: "/vox/#{@vc.id}/layers/delete", method: 'post'}
+          %form{action: "/chains/#{@vc.id}/layers/delete", method: 'post'}
             %input{type: 'hidden', name: 'vox_id', value: layer.vox.id}
             %button{type: 'submit'} delete
-%h4 voxes
+%h3 voxes
 %p
   - @vc.voxes.each do |vox|
     - starts_at = @vc.breaks.select{|b| b[0].id == vox.id}.first[1]
     %div
       %ul
         %li
-          %a{href: "/vox/#{@vc.id}/add_before/#{vox.id}"} add here
+          %a{href: "/chains/#{@vc.id}/add_before/#{vox.id}"} add here
         %li
-          %a{href: "/vox/#{@vc.id}/move/#{vox.id}"} move
+          %a{href: "/chains/#{@vc.id}/move/#{vox.id}"} move
         %li
-          %a{href: "/vox/#{@vc.id}/add_under/#{vox.id}"} start layer here
+          %a{href: "/chains/#{@vc.id}/add_under/#{vox.id}"} start layer here
         %li= "comment: #{vox.comment}"
-        %li= "created by: #{vox.user.handle}"
+        %li= "created by: #{vox.creator.handle}"
         %li= "time: #{vox.time / 1000.00}"
         %li= "starts at: #{starts_at}"
         %li= "previous: #{vox.pre && vox.pre.comment}"
         %li= "next: #{vox.nex && vox.nex.comment}"
         %li
-          %form{action: "/vox/#{@vc.id}/delete", method: 'post'}
-            %input{type: 'hidden', name: 'vox_id', value: vox.id}
+          %form{action: "/chains/#{@vc.id}/voxes/#{vox.id}/delete", method: 'post'}
+            %input{type: 'hidden', name: '_method', value: 'delete'}
             %button{type: 'submit'} delete
 -# :javascript
 -#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 320px;">');
 -#   $('.markers').append('<div style="display:inline-block;background-color:black;width:10px;height:20px;margin:0 0 0 640px;">');
+

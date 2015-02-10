@@ -1,0 +1,4 @@
+- @owner.cards.each do |card|
+  %div{style: 'width:170px;border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block'}
+    .title{style: 'margin-bottom:10px;font-size:0.75em;'}= "Proin imperdiet at lorem ut elementum. Integer vel quam libero. Morbi ullamcorper felis bibendum, sodales arcu non, gravida mauris. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed semper imperdiet dolor non malesuada. Donec luctus commodo ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac arcu sed purus aliquet sollicitudin eget vel augue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec rhoncus tellus orci, sagittis vestibulum nisi luctus quis. Pellentesque egestas elementum suscipit."
+    %img{src: polymorphic_url([@owner, card, 'image/original']), style: 'width:150px;height:150px;'}

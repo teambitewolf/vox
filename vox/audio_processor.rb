@@ -2,22 +2,20 @@ require 'cocaine'
 
 module AudioProcessor
   def sox_time!(rerun=false)
-    if ((self.time.nil? || time.to_i == 0) || rerun == true) && self.descriptor
+    if ((self.time.nil? || self.time.to_i == 0) || rerun == true) && self.descriptor
       cmd   = Cocaine::CommandLine.new('sox', check_wristwatch)
-      path  = descriptor.file_path
+      path  = self.descriptor.file_path
       match = /(\d+\.\d+)/.match cmd.run(in: path)
-
       self.time = match.captures.first.to_f*1000.to_i
     end
   end
 
-  # options: Hash :norm, :eq, :compress
   def sox_process!(options={})
-    return if processed? || descriptor.nil?
+    return if self.processed? || self.descriptor.nil?
 
     cmd    = Cocaine::CommandLine.new('sox', put_on_your_sox)
-    input  = descriptor.file_path_orig
-    output = file_path_p input
+    input  = self.descriptor.file_path_orig
+    output = self.file_path_p input
 
     cmd.run(in: input, out: output)
 
@@ -124,7 +122,7 @@ module AudioProcessor
     cmd << 'riaa' if eq
     cmd << 'compand 0.3,1 6:-70,-60,-20 -10 -90 0.2' if cm
     cmd << 'norm' if nm
-    # cmd << 'vad reverse vad reverse'
+    cmd << 'vad reverse vad reverse'
     cmd.join(' ')
   end
 

@@ -1,4 +1,4 @@
-%form{action: "/vox/#{@vc.id}/move", method: 'post'}
+%form{action: "/chains/#{@vc.id}/move", method: 'post'}
   %span move this:
   - starts_at = @vc.breaks.select{|b| b[0].id == @vox.id}.first[1]
   %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:0 10px 0 10px;height:100px;width:100px;'}

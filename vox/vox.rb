@@ -11,8 +11,8 @@ class Vox
   field :accepted, type: Boolean, default: true
 
   embeds_one :descriptor
-  belongs_to :vox_chain
-  belongs_to :user
+  belongs_to :chain
+  belongs_to :creator, class_name: 'User', inverse_of: :created_voxes
 
   has_one    :nex, class_name: "Vox", inverse_of: :pre
   belongs_to :pre, class_name: "Vox", inverse_of: :nex
@@ -31,11 +31,11 @@ class Vox
   end
 
   def persisted?
-    !read_attribute('descriptor').nil?
+    !self.read_attribute('descriptor').nil?
   end
 
   def processed?
-    persisted? && !read_attribute('descriptor').file_path_proc.nil?
+    self.persisted? && !self.read_attribute('descriptor').file_path_proc.nil?
   end
 
   def file_dir(root_path)
@@ -58,6 +58,7 @@ class Vox
     end
 
     dir = File.join parts[0...-1]
+
     FileUtils.mkdir_p dir unless File.directory? dir
 
     File.join parts
@@ -75,9 +76,9 @@ class Vox
 
     # raise InvalidFileType, 'Requires mp3 file!' unless ups && ups.audio?
 
-    file = ups.temp_file
+    file = ups.tempfile
     dir  = file_dir(root_path)
-    path = file_path(dir, ups.file_name)
+    path = file_path(dir, ups.filename)
 
     FileUtils.mkdir_p dir unless File.directory? dir
 
@@ -85,10 +86,10 @@ class Vox
 
     if written > 0
       {
-        file_name:      ups.file_name,
-        file_type:      ups.file_type,
-        file_cat:       ups.file_cat,
-        file_ext:       ups.file_ext,
+        file_name:      ups.filename,
+        file_type:      ups.filetype,
+        file_cat:       ups.filecat,
+        file_ext:       ups.fileext,
         file_path:      path,
         file_path_orig: path
       }
