@@ -1,27 +1,26 @@
-%body
-  %div{style: 'padding:0 50px 0 50px;height:100%;width:100%'}
+%div{style: 'padding:0 50px 0 50px;height:100%;width:100%'}
   - @vc.voxes.each do |u|
     - starts_at = @vc.breaks.select{|b| b[0].id == u.id}.first[1]
-    %a{href: "/vox/#{@vc.id}/add_before/#{u.id}"} A
+    %a{href: "/chains/#{@vc.id}/add_before/#{u.id}"} A
     %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:DarkCyan;color:white;display:inline-block;margin:10px;height:100px;width:100px;'}
       %span= u.comment
       %br
       %span= starts_at.to_s
       %br
-      %a{href: "/vox/#{@vc.id}/move/#{u.id}"} move
+      %a{href: "/chains/#{@vc.id}/move/#{u.id}"} move
       %div{style: 'position:absolute;left:10px;bottom:10px'}= u.pre ? u.pre.comment : 'nil'
       %div{style: 'position:absolute;right:10px;bottom:10px'}= u.nex ? u.nex.comment : 'nil'
-  %a{href: "/vox/#{@vc.id}/add"} A
-  %div{style: 'padding:0 50px 0 50px;height:100%;width:100%;margin:20px;'}
+  %a{href: "/chains/#{@vc.id}/add"} A
+%div{style: 'padding:0 50px 0 50px;height:100%;width:100%'}
   - @vc.ordered_voxes.each do |o|
     - starts_at = @vc.breaks.select{|b| b[0].id == o.id}.first[1]
-    %a{href: "/vox/#{@vc.id}/add_before/#{o.id}"} A
+    %a{href: "/chains/#{@vc.id}/add_before/#{o.id}"} A
     %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:10px;height:100px;width:100px;'}
       %span= o.comment
       %br
       %span= starts_at.to_s
       %br
-      %a{href: "/vox/#{@vc.id}/move/#{o.id}"} move
+      %a{href: "/chains/#{@vc.id}/move/#{o.id}"} move
       %div{style: 'position:absolute;left:10px;bottom:10px'}= o.pre ? o.pre.comment : 'nil'
       %div{style: 'position:absolute;right:10px;bottom:10px'}= o.nex ? o.nex.comment : 'nil'
-  %a{href: "/vox/#{@vc.id}/add"} A
+  %a{href: "/chains/#{@vc.id}/add"} A

@@ -2,22 +2,20 @@ require 'cocaine'
 
 module AudioProcessor
   def sox_time!(rerun=false)
-    if ((self.time.nil? || time.to_i == 0) || rerun == true) && self.descriptor
+    if ((self.time.nil? || self.time.to_i == 0) || rerun == true) && self.descriptor
       cmd   = Cocaine::CommandLine.new('sox', check_wristwatch)
-      path  = descriptor.file_path
+      path  = self.descriptor.file_path
       match = /(\d+\.\d+)/.match cmd.run(in: path)
-
       self.time = match.captures.first.to_f*1000.to_i
     end
   end
 
-  # options: Hash :norm, :eq, :compress
   def sox_process!(options={})
-    return if processed? || descriptor.nil?
+    return if self.processed? || self.descriptor.nil?
 
     cmd    = Cocaine::CommandLine.new('sox', put_on_your_sox)
-    input  = descriptor.file_path_orig
-    output = file_path_p input
+    input  = self.descriptor.file_path_orig
+    output = self.file_path_p input
 
     cmd.run(in: input, out: output)
 
@@ -29,13 +27,14 @@ module AudioProcessor
     if self.voxes.count > 0
       if self.voxes.count != self.count
         cmd    = Cocaine::CommandLine.new('sox', have_another_splice)
-        output = splice_path(root_path)
+        output = file_path(root_path)
         cmd.run(out: output)
 
         self.count = voxes.count
 
         if self.descriptor
           self.descriptor.file_path = output
+          self.descriptor.file_path_orig = output
         else
           self.descriptor = Descriptor.new({
             file_name: output.split('/').last,
@@ -43,33 +42,51 @@ module AudioProcessor
             file_cat:  'audio',
             file_ext:  'mp3',
             file_path: output,
+            file_path_orig: output
           })
         end
 
         sox_time! true
-      else
-        # ???
       end
     else
       self.time = 0 if !self.time.nil?
     end
+
+    self.save
   end
 
-=begin
-To combine mix and effects (pad, trim etc) use the following:
+  def mix!
+    if self.respond_to?(:layers) && self.layers.count > 0
+      output = self.file_path_p self.descriptor.file_path
 
-sox -m "|sox end.mp3 -p pad 6 0" start.mp3 output.mp3
-The general pattern is:
+      self.layers.each do |layer|
+        cmd    = Cocaine::CommandLine.new('sox', merge_conflict)
+        input  = pad_trim_vol layer
+        cmd.run(in: input, main: self.descriptor.file_path_orig, out: output)
+        layer.applied = true
+      end
 
-sox -m input1 input2 ... inputN output
-where inputX can be either a filename or a pipe in quotes
+      self.descriptor.file_path = output
+      self.descriptor.file_path_proc = output
+      self.save
+    end
+  end
 
-"|sox end.mp3 -p pad 6"
-=end
-  def merge!; self; end
+  # DON'T TRIM 0 0 IDIOT
+  def pad_trim_vol(layer)
+    start_time = self.breaks.select{|o| o[0].id == layer.lstart.id}.first[1].round 2
+    time_between = self.time_between(layer.lstart, layer.lend).round 2
+    trim = (layer.vox.time / 1000.00) < time_between ? " " : "trim 0 #{time_between} "
+    volume = (layer.vol / 100.00).round 2
+    "| sox #{layer.vox.descriptor.file_path_proc} -p #{trim}pad #{start_time} 0 vol #{volume}"
+  end
 
   def merge_conflict
     cmd = []
+    cmd << '-m'
+    cmd << ':in'
+    cmd << ':main'
+    cmd << ':out'
     cmd.join(' ')
   end
 

@@ -1,0 +1,3 @@
+%form{action: "/chains/#{@vc.id}/layers/#{@layer.id}/edit", method: 'post'}
+  %input{name: 'volume', value: @layer.vol, type: 'text'}
+    %button{type: 'submit'} go!

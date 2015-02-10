@@ -1,0 +1,37 @@
+%h2 open for you
+%ul
+  - @open_invites.each do |invite|
+    %li= "invited to: #{invite.chain.title}"
+    %li= "invited by: #{invite.invitor.handle}"
+    %li
+      %form{action: "/invitations/#{invite.id}/accept", method: 'post'}
+        %button{type: 'submit'} accept
+    %li
+      %form{action: "/invitations/#{invite.id}/decline", method: 'post'}
+        %button{type: 'submit'} decline
+    %br
+%div{style: 'background-color:#BCED91'}
+  %h2 accepted by you
+  %ul
+    - @accepted_invites.each do |invite|
+      %li= "you ACCEPTED to collaborate on #{invite.chain.title}, from #{invite.invitee.handle}"
+%div{style: 'background-color:#FA8072'}
+  %h2 declined by you
+  %ul
+    - @declined_invites.each do |invite|
+      %li= "you declined to collaborate on #{invite.chain.title}, from #{invite.invitee.handle}"
+%div
+  %h2 open for others
+  %ul
+    - @open.each do |invite|
+      %li= "#{invite.invitee.handle} has yet to [accept|decline] your offer to collaborate on #{invite.chain.title}"
+%div{style: 'background-color:#BCED91'}
+  %h2 accepted by others
+  %ul
+    - @accepted.each do |invite|
+      %li= "#{invite.invitee.handle} has ACCEPTED your offer to collaborate on #{invite.chain.title}"
+%div{style: 'background-color:#FA8072'}
+  %h2 declined by others
+  %ul
+    - @declined.each do |invite|
+      %li= "#{invite.invitee.handle} has DECLINED your offer to collaborate on #{invite.chain.title}"

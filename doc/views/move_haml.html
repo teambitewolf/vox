@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>move.haml - RDoc Documentation</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Gemfile.html">Gemfile</a>
+  
+    <li><a href="../Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="../LICENSE.html">LICENSE</a>
+  
+    <li><a href="../README_md.html">README</a>
+  
+    <li><a href="../config_ru.html">config.ru</a>
+  
+    <li><a href="../views/add_haml.html">add.haml</a>
+  
+    <li><a href="../views/add_before_haml.html">add_before.haml</a>
+  
+    <li><a href="../views/add_under_haml.html">add_under.haml</a>
+  
+    <li><a href="../views/error_haml.html">error.haml</a>
+  
+    <li><a href="../views/half_under_haml.html">half_under.haml</a>
+  
+    <li><a href="../views/layout_haml.html">layout.haml</a>
+  
+    <li><a href="../views/login_haml.html">login.haml</a>
+  
+    <li><a href="../views/move_haml.html">move.haml</a>
+  
+    <li><a href="../views/new_haml.html">new.haml</a>
+  
+    <li><a href="../views/ordered_haml.html">ordered.haml</a>
+  
+    <li><a href="../views/user_haml.html">user.haml</a>
+  
+    <li><a href="../views/vox_haml.html">vox.haml</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page views/move.haml">
+
+<p>%form{action: “/vox/#{@vc.id}/move”, method: &#39;post&#39;}</p>
+
+<pre class="ruby"><span class="ruby-value">%san move this:
+- starts_at = @vc.breaks.select{|b| b[0].id == @vox.id}.first[1]
+%div{style: &#39;text-align:center;p</span><span class="ruby-identifier">osition</span><span class="ruby-operator">:</span><span class="ruby-identifier">relative</span>;<span class="ruby-identifier">padding</span>:<span class="ruby-value">5</span><span class="ruby-identifier">px</span> <span class="ruby-value">0</span> <span class="ruby-value">0</span> <span class="ruby-value">5</span><span class="ruby-identifier">px</span>;<span class="ruby-identifier">background</span><span class="ruby-operator">-</span><span class="ruby-identifier">color</span>:<span class="ruby-constant">FireBrick</span>;<span class="ruby-identifier">color</span>:<span class="ruby-identifier">white</span>;<span class="ruby-identifier">display</span>:<span class="ruby-identifier">inline</span><span class="ruby-operator">-</span><span class="ruby-identifier">block</span>;<span class="ruby-identifier">margin</span>:<span class="ruby-value">0</span> <span class="ruby-value">10</span><span class="ruby-identifier">px</span> <span class="ruby-value">0</span> <span class="ruby-value">10</span><span class="ruby-identifier">px</span>;<span class="ruby-identifier">height</span>:<span class="ruby-value">100</span><span class="ruby-identifier">px</span>;<span class="ruby-identifier">width</span>:<span class="ruby-value">100</span><span class="ruby-identifier">px</span>;<span class="ruby-string">&#39;}
+  %span= @vox.comment
+  %br
+  %span= starts_at.to_s
+  %div{style: &#39;</span><span class="ruby-identifier">position</span><span class="ruby-operator">:</span><span class="ruby-identifier">absolute</span>;<span class="ruby-identifier">left</span>:<span class="ruby-value">10</span><span class="ruby-identifier">px</span>;<span class="ruby-identifier">bottom</span>:<span class="ruby-value">10</span><span class="ruby-identifier">px</span><span class="ruby-string">&#39;}= @vox.pre ? @vox.pre.comment : &#39;</span><span class="ruby-keyword">nil</span><span class="ruby-string">&#39;
+  %div{style: &#39;</span><span class="ruby-identifier">position</span><span class="ruby-operator">:</span><span class="ruby-identifier">absolute</span>;<span class="ruby-identifier">right</span>:<span class="ruby-value">10</span><span class="ruby-identifier">px</span>;<span class="ruby-identifier">bottom</span>:<span class="ruby-value">10</span><span class="ruby-identifier">px</span><span class="ruby-string">&#39;}= @vox.nex ? @vox.nex.comment : &#39;</span><span class="ruby-keyword">nil</span><span class="ruby-string">&#39;
+%input{type: &#39;</span><span class="ruby-identifier">hidden</span><span class="ruby-string">&#39;, name: &#39;</span><span class="ruby-identifier">move_vox</span><span class="ruby-string">&#39;, value: @vox.id.to_s}
+%br
+%br
+%select{name: &#39;</span><span class="ruby-identifier">pos</span><span class="ruby-string">&#39;}
+  %option{value: &#39;</span><span class="ruby-identifier">before</span><span class="ruby-string">&#39;} before
+  %option{value: &#39;</span><span class="ruby-identifier">after</span><span class="ruby-string">&#39;} after
+%br
+%br
+%span this:
+%select{name: &#39;</span><span class="ruby-identifier">to_vox</span><span class="ruby-string">&#39;}
+  - @vc.voxes.each do |v|
+    %option{value: v.id}= v.comment
+%br
+%br
+%button{type: &#39;</span><span class="ruby-identifier">submit</span><span class="ruby-string">&#39;} submit
+</span></pre>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

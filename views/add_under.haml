@@ -1,0 +1,23 @@
+%form{action: "/chains/#{@vc.id}/add_under", method: 'post', enctype: 'multipart/form-data'}
+  %span start layer at:
+  - starts_at = @vc.breaks.select{|b| b[0].id == @start.id}.first[1]
+  %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:0 10px 0 10px;height:100px;width:100px;'}
+    %span= @start.comment
+    %br
+    %span= starts_at.to_s
+    %input{type: 'hidden', name: 'start_vox', value: @start.id.to_s}
+  %span end layer at:
+  - starts_at = @vc.breaks.select{|b| b[0].id == @end.id}.first[1]
+  %div{style: 'text-align:center;position:relative;padding:5px 0 0 5px;background-color:FireBrick;color:white;display:inline-block;margin:0 10px 0 10px;height:100px;width:100px;'}
+    %span= @end.comment
+    %br
+    %span= starts_at.to_s
+    %input{type: 'hidden', name: 'end_vox', value: @end.id.to_s}
+  %br
+  %h4 insert this:
+  %input{type: 'text', name: 'vox[comment]'}
+  %br
+  %input{type: 'file', name: 'vox[upload]'}
+  %br
+  %br
+  %button{type: 'submit'} submit

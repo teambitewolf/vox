@@ -1,0 +1,21 @@
+-# :javascript
+-#   $(document).ready(function (){
+-#     $.ajax({
+-#       url: '/users.json',
+-#       type: 'GET'
+-#     }).done(function(data) {
+-#       $('#invitee').autocomplete({
+-#         source: $.map(data, function(item, i) {
+-#           return item.handle;
+-#         })
+-#       });
+-#     }).fail(function(err) {
+-#       alert('wat');
+-#     });
+-#   });
+%h2 invite:
+%form{action: "/chains/#{@vc.id}/invitations", method: 'post'}
+  %input{type: 'hidden', name: 'invitation[invitor_id]', value: "#{current_user.id}"}
+  %input#invitee{type: 'text', name: 'invitation[invitee_handle]'}
+  %h2= "to #{@vc.title}"
+  %button{type: 'submit'} submit

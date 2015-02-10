@@ -1,0 +1,44 @@
+- if current_user.id == @user.id
+  %a{href: "/users/#{@user.id}/edit"} edit profile
+  = ' | '
+  %a{href: "/users/#{@user.id}/cards/edit"} edit cards
+  = ' | '
+  %a{href: "/users/#{@user.id}/cards/new"} add card
+  = ' | '
+  %a{href: "/users/#{@user.id}/invitations"} invitations
+%h2= @user.handle
+%h2= @user.email
+%h3
+  creations
+  %a{href: '/chains/new'} new
+- @user.created_chains.each do |v|
+  %a{href: "/chains/#{v.id}", style: 'font-size:2em;'}
+    %div{style: 'border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block'}
+      = v.title
+%h3 collabs
+= 'no collabs!' if @user.collaborations.empty?
+- @user.collaborations.each do |v|
+  %ul
+    %li
+      %a{href: "/chains/#{v.id}"}= v.title
+%h3
+  decks
+  %a{href: "/users/#{@user.id}/decks/new"} new
+= 'no decks!' if @user.decks.empty?
+- @user.decks.each do |deck|
+  %div{style: 'border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block;'}
+    %div
+      %span= deck.name
+      %a{href: "/decks/#{deck.id}/cards/new"} new
+    - deck.cards.each do |card|
+      %div{style: 'width:300px;border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block;'}
+        %img{src: polymorphic_url([deck, card, 'image/small']), style: 'float:right;'}
+        .title{style: 'margin-top:10px;font-size:0.75em;'}= card.text
+%h3
+  cards
+  %a{href: "/user/#{@user.id}/cards/new"} new
+= 'no cards!' if @user.cards.empty?
+- @user.cards.each do |card|
+  %div{style: 'width:300px;border:1px solid black;padding:10px;margin:10px;text-align:center;display:inline-block;'}
+    %img{src: polymorphic_url([@user, card, 'image/small']), style: 'float:right;'}
+    .title{style: 'margin-top:10px;font-size:0.75em;'}= card.text
